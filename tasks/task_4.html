@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>ДЗ 12</title>
+</head>
+<body>
+	<header>
+		<a href="../index.html">На головну.</a>
+	</header>
+	<main>
+		<p>Задача 4. Для розглянутих методів сортування спробувати вивести етапи сортування шляхом виведення відповідних таблиць за зразком.
+			Тобто кожного разу після обміну елементів вивести поточний стан масиву на екран.</p>
+			<h2>Розвʼязок:</h2>
+		<script>
+			function getRandom(minV,maxV) {
+				return Math.floor(Math.random()*(maxV-minV+1)+minV)
+			}
+			function getArrRandom(qtyEl,minV,maxV) {
+				let arr=[]
+				for (let i = 0; i < qtyEl; i++) {
+					arr.push(getRandom(minV,maxV))
+				}
+				return arr
+			}
+			let arr=getArrRandom(5,1,100)
+			let arr_2=[...arr]
+			let arr_3=[...arr]
+			// ===========Сортування бульбашкою===========
+			document.write(`<p>Створений масив: ${arr}</p>
+				<p>Сортування бульбашкою:</p>`)
+			function sortBubble(arr) {
+				let count=0
+				let change
+				let res=''
+				do {
+					change=false
+					for (let i = 1; i < arr.length; i++) {
+						if (arr[i-1]>arr[i]) {
+							let temp=arr[i-1]
+							arr[i-1]=arr[i]
+							arr[i]=temp
+							count++
+							change=true
+						}
+						res+=`${arr}<br>`
+					}
+				} while (change);
+				return res
+			}
+			document.write(sortBubble(arr))
+			//=========Сортування змішуванням==========
+			document.write(`<p>Створений масив: ${arr_2}</p>
+				<p>Сортування змішуванням:</p>`)
+				function sortMix(arr_2) {
+					let swapCount=0
+					let leftIndex=0
+					let rightIndex=arr_2.length-1
+					while (leftIndex<rightIndex) {
+						for (let i = leftIndex; i < rightIndex; i++) {
+							if (arr_2[i]>arr_2[i+1]) {
+								[arr_2[i],arr_2[i+1]]=[arr_2[i+1],arr_2[i]]
+								swapCount++
+								document.write(`${arr_2}<br>`)
+							}
+						}
+						rightIndex--
+						for (let j = rightIndex; j > leftIndex; j--) {
+							if (arr_2[j]<arr_2[j-1]) {
+								[arr_2[j],arr_2[j-1]]=[arr_2[j-1],arr_2[j]]
+								swapCount++
+								document.write(`${arr_2}<br>`)
+							}
+						}
+						leftIndex++
+					}
+				}
+				sortMix(arr_2)
+			//============Сортування включенням===========
+			document.write(`<p>Створений масив: ${arr_3}</p>
+				<p>Сортування включенням:</p>`)
+			function inclusionSort(arr) {
+				for (let i = 1; i < arr.length; i++) {
+					const corElem=arr[i]
+					let j=i-1
+					while (j>=0&&arr[j]>corElem) {
+						arr[j+1]=arr[j]
+						j=j-1
+					}
+					arr[j+1]=corElem
+					document.write(`${arr}<br>`)
+				}
+			}
+			inclusionSort(arr_3)
+		</script>
+	</main>
+</body>
+</html>

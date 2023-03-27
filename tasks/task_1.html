@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>ДЗ 12</title>
+</head>
+<body>
+	<header>
+		<a href="../index.html">На головну.</a>
+	</header>
+	<main>
+		<p>Задача 1. Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування бульбашкою.</p>
+		<h2>Розвʼязок:</h2>
+		<script>
+			function getRandom(minV,maxV) {
+				return Math.floor(Math.random()*(maxV-minV+1)+minV)
+			}
+			function getArrRandom(qtyEl,minV,maxV) {
+				let arr=[]
+				for (let i = 0; i < qtyEl; i++) {
+					arr.push(getRandom(minV,maxV))
+				}
+				return arr
+			}
+			const arr=getArrRandom(30,1,100)
+			document.write(`<p>Створений масив: ${arr}</p>`)
+			//сортування бульбашкою
+			let count=0
+			let change
+			do {
+				change=false
+				for (let i = 1; i < arr.length; i++) {
+					if (arr[i-1]>arr[i]) {
+						let temp=arr[i-1]
+						arr[i-1]=arr[i]
+						arr[i]=temp
+						count++
+						change=true
+					}
+				}
+			} while (change);
+			document.write(`<p>Відфільтрований масив: ${arr}</p>
+				<p>Кількість змін: ${count}</p>`)
+		</script>
+	</main>
+</body>
+</html>

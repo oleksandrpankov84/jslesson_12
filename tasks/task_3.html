@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>ДЗ 12</title>
+</head>
+<body>
+	<header>
+		<a href="../index.html">На головну.</a>
+	</header>
+	<main>
+		<p>Задача 3. Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування включеннями.</p>
+		<h2>Розвʼязок:</h2>
+		<script>
+			function getRandom(minV,maxV) {
+				return Math.floor(Math.random()*(maxV-minV+1)+minV)
+			}
+			function getArrRandom(qtyEl,minV,maxV) {
+				let arr=[]
+				for (let i = 0; i < qtyEl; i++) {
+					arr.push(getRandom(minV,maxV))
+				}
+				return arr
+			}
+			const arr=getArrRandom(30,1,100)
+			document.write(`<p>Створений масив: ${arr}</p>`)
+			let swapCount=0
+			function arrSort(arr) {
+				for (let i = 1; i < arr.length; i++) {
+					const corElem=arr[i]
+					let j=i-1
+					while (j>=0&&arr[j]>corElem) {
+						arr[j+1]=arr[j]
+						j=j-1
+						swapCount++
+					}
+					arr[j+1]=corElem
+				}
+			}
+			const sortedArr=arrSort(arr)
+			document.write(`<p>Відсортований масив: ${arr}</p><p>Кількість змін: ${swapCount}</p>`)
+		</script>
+	</main>
+</body>
+</html>
